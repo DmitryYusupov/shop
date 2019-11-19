@@ -1,0 +1,10 @@
+server:
+  port: 8087
+
+app:
+  db:
+   schema: "SHOP"
+   url: "jdbc:h2:mem:test;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS SHOP"
+   driver: "org.h2.Driver"
+   user: "sa"
+   password: ""

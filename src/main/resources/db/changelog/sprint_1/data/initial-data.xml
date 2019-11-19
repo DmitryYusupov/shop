@@ -1,0 +1,44 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="init_category_with_data" author="dyusupov">
+
+        <preConditions onFail="MARK_RAN">
+                <tableExists tableName="CATEGORY" schemaName="${schema}"/>
+        </preConditions>
+
+        <sql dbms="postgresql,h2" endDelimiter=";">
+            INSERT INTO ${schema}.CATEGORY (ID, NAME, DESCRIPTION) VALUES ('892164bb-2bd6-4613-aaab-8a0aaec0e73b', 'Mobile devices', 'Mobile devices descr');
+            INSERT INTO ${schema}.CATEGORY (ID, NAME, DESCRIPTION) VALUES ('22c08415-303f-42fe-8f9b-3321f4bc84b4', 'Food', 'Food description');
+            INSERT INTO ${schema}.CATEGORY (ID, NAME, DESCRIPTION) VALUES ('22c08415-303f-42fe-8f9b-3321f4bc8b', 'Dairy', 'Dairy description');
+            INSERT INTO ${schema}.CATEGORY (ID, PARENT_CATEGORY_ID, NAME, DESCRIPTION) VALUES ('6caea179-e1fb-47ea-b8cf-c91aec8511b9', '22c08415-303f-42fe-8f9b-3321f4bc84b4', 'Fruits', 'Fruits description');
+        </sql>
+    </changeSet>
+
+    <changeSet id="init_product_with_data" author="dyusupov">
+
+        <preConditions onFail="MARK_RAN">
+                <tableExists tableName="CATEGORY" schemaName="${schema}"/>
+        </preConditions>
+
+        <sql dbms="postgresql,h2" endDelimiter=";">
+            INSERT INTO ${schema}.PRODUCT (ID, CATEGORY_ID, NAME, PRICE) VALUES (
+            '892164bb-2bd6-4613-aaab-8a0aaec0e73b',
+            (SELECT ID FROM CATEGORY WHERE NAME = 'Mobile devices'),
+            'Iphone X',
+            '100'
+            );
+            INSERT INTO ${schema}.PRODUCT (ID, CATEGORY_ID, NAME, PRICE) VALUES (
+            '892164bb-2bd6-4613-aaab-8a0aaec0eaaab',
+            (SELECT ID FROM CATEGORY WHERE NAME = 'Mobile devices'),
+            'Samsung Galaxy',
+            '100'
+            );
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

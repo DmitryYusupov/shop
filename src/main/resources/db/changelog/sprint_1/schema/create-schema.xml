@@ -1,0 +1,79 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_table_category" author="dyusupov">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="CATEGORY" schemaName="${schema}"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="CATEGORY" schemaName="${schema}">
+            <column name="ID" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="PARENT_CATEGORY_ID" type="UUID"/>
+
+            <column name="NAME" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DESCRIPTION" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="add_fk_category_parent" author="dyusupov">
+        <addForeignKeyConstraint baseTableSchemaName="${schema}"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="CATEGORY"
+                                 baseColumnNames="PARENT_CATEGORY_ID"
+                                 baseTableName="CATEGORY"
+                                 constraintName="FK_CATEGORY_PARENT"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+
+    <changeSet id="create_table_product" author="dyusupov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="PRODUCT" schemaName="${schema}"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PRODUCT" schemaName="${schema}">
+            <column name="ID" type="UUID">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="CATEGORY_ID" type="UUID"/>
+
+            <column name="NAME" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="PRICE" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add_fk_category_product" author="dyusupov">
+        <addForeignKeyConstraint baseTableSchemaName="${schema}"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="CATEGORY"
+                                 baseColumnNames="CATEGORY_ID"
+                                 baseTableName="PRODUCT"
+                                 constraintName="FK_CATEGORY_PRODUCT"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+</databaseChangeLog>

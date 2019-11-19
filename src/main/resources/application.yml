@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev-h2
+app:
+  integrations:
+     fixer:
+        accessKey: key
+        url: http://data.fixer.io/api
+        baseCurrency: EUR
+        cron: 0 0/1 * * * *
+
