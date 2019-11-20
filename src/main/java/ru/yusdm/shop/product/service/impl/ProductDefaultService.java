@@ -54,7 +54,7 @@ public class ProductDefaultService implements ProductService {
     }
 
     private double convertPriceToEuro(Currency currency, double price) {
-        return Optional.ofNullable(byEuroRatesCache.getRates().get(currency)).map(rate -> price * (double) 1 / rate)
+        return Optional.ofNullable(byEuroRatesCache.getRates().get(currency)).map(rate -> price * rate)
                 .orElseThrow(() -> new ShopException(ExceptionCode.NO_INFORMATION_ABOUT_CURRENCY));
     }
 
