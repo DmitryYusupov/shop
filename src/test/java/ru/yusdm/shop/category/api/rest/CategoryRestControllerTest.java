@@ -18,6 +18,7 @@ import ru.yusdm.shop.category.domain.Category;
 import ru.yusdm.shop.category.dto.CategoryDomainDtoMapper;
 import ru.yusdm.shop.category.dto.CategoryDto;
 import ru.yusdm.shop.category.service.CategoryService;
+import ru.yusdm.shop.common.utils.UuidConverter;
 import ru.yusdm.shop.integration.fixer.api.rest.FixerRestClient;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class CategoryRestControllerTest {
         List<Category> expectedDomains = getExpectedDomains();
         List<CategoryDto> expectedDtos = expectedDomains.stream().map(domain -> {
             CategoryDto dto = new CategoryDto();
-            dto.setId(domain.getId());
+            dto.setId(UuidConverter.from(domain.getId()));
             return dto;
         }).collect(Collectors.toList());
 
@@ -75,11 +76,11 @@ public class CategoryRestControllerTest {
     private List<Category> getExpectedDomains() {
         List<Category> dtos = new ArrayList<>();
         Category category = new Category();
-        category.setId(UUID.randomUUID().toString());
+        category.setId(UUID.randomUUID());
         dtos.add(category);
 
         category = new Category();
-        category.setId(UUID.randomUUID().toString());
+        category.setId(UUID.randomUUID());
         dtos.add(category);
 
         return dtos;
@@ -88,7 +89,7 @@ public class CategoryRestControllerTest {
     @Test
     public void testGetById() throws Exception{
         Category expectedDomain = new Category();
-        String id = UUID.randomUUID().toString();
+        UUID id = UUID.randomUUID();
         expectedDomain.setId(id);
 
         CategoryDto expectedDto = new CategoryDto();

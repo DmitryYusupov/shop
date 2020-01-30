@@ -19,6 +19,7 @@ sourceSets {
 		runtimeClasspath += sourceSets.main.output
 	}
 }
+//https://github.com/mtumilowicz/gradle-integration-test-task/blob/master/build.gradle
 //https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
 //Another common step is to attach all the unit test dependencies to the integration tests 
 // as well — via intTestImplementation.extendsFrom testImplementation
@@ -56,6 +57,23 @@ dependencies {
 	//intTestImplementation 'junit:junit:4.12'
 }
 
+task integrationTest(type: Test) {
+	description = 'Runs integration tests.'
+	group = 'verification'
+
+	testClassesDirs = sourceSets.intTest.output.classesDirs
+	classpath = sourceSets.intTest.runtimeClasspath
+	//we can uncomment it to embed to full circle
+	//shouldRunAfter test
+}
+//we can uncomment it to embed to full circle
+//check.dependsOn integrationTest
+
 test {
 	useJUnitPlatform()
 }
+
+integrationTest {
+	useJUnitPlatform()
+}
+
