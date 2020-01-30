@@ -6,6 +6,7 @@ import ru.yusdm.shop.product.domain.Product;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -15,7 +16,7 @@ public class Category {
 
     @Id
     @Column(name = "ID")
-    private String id;
+    private UUID id;
 
     @Column(name = "NAME")
     private String name;

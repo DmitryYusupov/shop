@@ -8,6 +8,7 @@ import ru.yusdm.shop.category.domain.Category;
 import ru.yusdm.shop.category.dto.CategoryDomainDtoMapper;
 import ru.yusdm.shop.category.dto.CategoryDto;
 import ru.yusdm.shop.category.service.CategoryService;
+import ru.yusdm.shop.common.utils.UuidConverter;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,7 +25,7 @@ public class CategoryRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDto> getById(@PathVariable("id") String id) {
-        return categoryService.findById(id)
+        return categoryService.findById(UuidConverter.to(id))
                 .map(domain -> ResponseEntity.ok(categoryDomainDtoMapper.fromDomainToDto(domain)))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -52,7 +53,7 @@ public class CategoryRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") String id) {
-        categoryService.delete(id);
+        categoryService.delete(UuidConverter.to(id));
         return ResponseEntity.ok().build();
     }
 

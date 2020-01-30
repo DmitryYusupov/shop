@@ -12,23 +12,48 @@ repositories {
 	mavenCentral()
 }
 
+
+sourceSets {
+	intTest {
+		compileClasspath += sourceSets.main.output
+		runtimeClasspath += sourceSets.main.output
+	}
+}
+//https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
+//Another common step is to attach all the unit test dependencies to the integration tests 
+// as well — via intTestImplementation.extendsFrom testImplementation
+configurations {
+	intTestImplementation.extendsFrom implementation
+	intTestImplementation.extendsFrom testImplementation
+	intTestRuntimeOnly.extendsFrom runtimeOnly
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.liquibase:liquibase-core'
+	implementation 'org.apache.commons:commons-lang3'
+	implementation 'javax.validation:validation-api'
+	implementation 'org.apache.commons:commons-collections4:4.0'
 
+
+	runtimeOnly 'org.postgresql:postgresql'
+	
 	compileOnly  'org.mapstruct:mapstruct-jdk8:1.3.1.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
 
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
-
-
+	
 	runtimeOnly 'com.h2database:h2'
+	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
+	intTestImplementation "org.testcontainers:postgresql:1.12.5"
+	//intTestImplementation 'junit:junit:4.12'
 }
 
 test {

@@ -24,7 +24,7 @@ public class ProductDefaultService implements ProductService {
     private DailyCurrencyByEuroRatesCache byEuroRatesCache;
 
     @Override
-    public Optional<Product> findById(String id) {
+    public Optional<Product> findById(UUID id) {
         return productRepo.findById(id);
     }
 
@@ -34,11 +34,11 @@ public class ProductDefaultService implements ProductService {
     }
 
     @Override
-    public String save(Product product) {
-        String id = product.getId();
+    public UUID save(Product product) {
+        UUID id = product.getId();
 
         if (id == null) {
-            id = UUID.randomUUID().toString();
+            id = UUID.randomUUID();
             product.setId(id);
         }
         setEuroPriceToProduct(product);
@@ -59,7 +59,7 @@ public class ProductDefaultService implements ProductService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(UUID id) {
         productRepo.deleteById(id);
     }
 

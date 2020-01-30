@@ -13,7 +13,7 @@
         <sql dbms="postgresql,h2" endDelimiter=";">
             INSERT INTO ${schema}.CATEGORY (ID, NAME, DESCRIPTION) VALUES ('892164bb-2bd6-4613-aaab-8a0aaec0e73b', 'Mobile devices', 'Mobile devices descr');
             INSERT INTO ${schema}.CATEGORY (ID, NAME, DESCRIPTION) VALUES ('22c08415-303f-42fe-8f9b-3321f4bc84b4', 'Food', 'Food description');
-            INSERT INTO ${schema}.CATEGORY (ID, NAME, DESCRIPTION) VALUES ('22c08415-303f-42fe-8f9b-3321f4bc8b', 'Dairy', 'Dairy description');
+            INSERT INTO ${schema}.CATEGORY (ID, NAME, DESCRIPTION) VALUES ('22c08415-303f-42fe-8f9b-3321f4bc8b88', 'Dairy', 'Dairy description');
             INSERT INTO ${schema}.CATEGORY (ID, PARENT_CATEGORY_ID, NAME, DESCRIPTION) VALUES ('6caea179-e1fb-47ea-b8cf-c91aec8511b9', '22c08415-303f-42fe-8f9b-3321f4bc84b4', 'Fruits', 'Fruits description');
         </sql>
     </changeSet>
@@ -26,15 +26,15 @@
 
         <sql dbms="postgresql,h2" endDelimiter=";">
             INSERT INTO ${schema}.PRODUCT (ID, CATEGORY_ID, NAME, PRICE) VALUES (
-            '892164bb-2bd6-4613-aaab-8a0aaec0e73b',
+            '892164bb-2bd6-4613-aaab-8a0aaec0e73a',
             (SELECT ID FROM CATEGORY WHERE NAME = 'Mobile devices'),
             'Iphone X',
             '100'
             );
             INSERT INTO ${schema}.PRODUCT (ID, CATEGORY_ID, NAME, PRICE) VALUES (
-            '892164bb-2bd6-4613-aaab-8a0aaec0eaaab',
+            '892164bb-2bd6-4613-aaab-8a0aaec0e73b',
             (SELECT ID FROM CATEGORY WHERE NAME = 'Mobile devices'),
-            'Samsung Galaxy',
+            'Iphone 5',
             '100'
             );
         </sql>

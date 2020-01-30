@@ -15,12 +15,12 @@ import java.util.UUID;
 @Service
 @Transactional
 @AllArgsConstructor
-public class DefaultCategoryService implements CategoryService {
+public class CategoryDefaultService implements CategoryService {
 
     private final CategoryRepo categoryRepo;
 
     @Override
-    public Optional<Category> findById(String id) {
+    public Optional<Category> findById(UUID id) {
         return categoryRepo.findById(id);
     }
 
@@ -30,11 +30,11 @@ public class DefaultCategoryService implements CategoryService {
     }
 
     @Override
-    public String save(Category category) {
+    public UUID save(Category category) {
 
-        String id = category.getId();
+        UUID id = category.getId();
         if (id == null) {
-            id = UUID.randomUUID().toString();
+            id = UUID.randomUUID();
             category.setId(id);
         }
 
@@ -42,7 +42,7 @@ public class DefaultCategoryService implements CategoryService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(UUID id) {
         categoryRepo.deleteById(id);
     }
 

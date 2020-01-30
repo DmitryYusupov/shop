@@ -5,6 +5,7 @@ import lombok.Setter;
 import ru.yusdm.shop.category.domain.Category;
 import ru.yusdm.shop.common.domain.Currency;
 
+import java.util.UUID;
 import javax.persistence.*;
 
 @Getter
@@ -14,7 +15,7 @@ import javax.persistence.*;
 public class Product {
     @Id
     @Column(name = "ID")
-    private String id;
+    private UUID id;
 
     @Column(name = "NAME")
     private String name;

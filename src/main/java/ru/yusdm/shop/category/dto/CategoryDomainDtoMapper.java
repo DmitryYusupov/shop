@@ -5,12 +5,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import ru.yusdm.shop.category.domain.Category;
+import ru.yusdm.shop.common.mapper.CommonMappings;
 
 import java.util.Collection;
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
-public interface CategoryDomainDtoMapper {
+public interface CategoryDomainDtoMapper extends CommonMappings {
     CategoryDto fromDomainToDto(Category category);
     List<CategoryDto> fromDomainsToDtos(Collection<Category> category);
 

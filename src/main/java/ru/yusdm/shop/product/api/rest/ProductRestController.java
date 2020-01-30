@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.yusdm.shop.common.utils.UuidConverter;
 import ru.yusdm.shop.product.domain.Product;
 import ru.yusdm.shop.product.dto.ProductDomainDtoMapper;
 import ru.yusdm.shop.product.dto.ProductDto;
@@ -23,7 +24,7 @@ public class ProductRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getById(@PathVariable("id") String id) {
-        return productService.findById(id)
+        return productService.findById(UuidConverter.to(id))
                 .map(domain -> ResponseEntity.ok(productDomainDtoMapper.fromDomainToDto(domain)))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -51,7 +52,7 @@ public class ProductRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") String id) {
-        productService.delete(id);
+        productService.delete(UuidConverter.to(id));
         return ResponseEntity.ok().build();
     }
 }

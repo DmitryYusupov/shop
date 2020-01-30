@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: integration-test
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+logging:
+  level:
+    root: INFO
+    com.github.dockerjava.core: INFO
+    org.testcontainers: INFO
+    org.testcontainers.utility: INFO
+
+app:
+  db:
+    schema: "shop"
+    url: ${DB_URL}
+    driver: "org.postgresql.Driver"
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  integrations:
+    fixer:
+      accessKey: 8b4aa49c8893dbd669305458fe4b373b
+      url: http://data.fixer.io/api
+      baseCurrency: EUR
+      cron: 0 0/1 * * * *
