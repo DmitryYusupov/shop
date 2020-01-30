@@ -34,7 +34,7 @@ class DefaultCategoryServiceTest extends BaseDatabaseIntegrationTest {
     System.out.println("SIZE " + categoryService.getAll().size());
   }
 
-  @Test
+ /* @Test
   public void testSave2() {
     Category category = new Category();
     UUID id = UUID.randomUUID();
@@ -48,5 +48,5 @@ class DefaultCategoryServiceTest extends BaseDatabaseIntegrationTest {
     Assertions.assertTrue(categoryOptional.isPresent());
 
     System.out.println("SIZE " + categoryService.getAll().size());
-  }
+  }*/
 }
