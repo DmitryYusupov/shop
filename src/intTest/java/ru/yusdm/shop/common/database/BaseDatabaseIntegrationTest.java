@@ -5,10 +5,15 @@ import ru.yusdm.shop.common.BaseIntegrationTest;
 
 public class BaseDatabaseIntegrationTest extends BaseIntegrationTest {
 
-  static final PostgresqlDockerContainer POSTGRESQL_DOCKER_CONTAINER;
+  static  PostgresqlDockerContainer POSTGRESQL_DOCKER_CONTAINER;
+
   static {
-    POSTGRESQL_DOCKER_CONTAINER = new PostgresqlDockerContainer();
-    POSTGRESQL_DOCKER_CONTAINER.start();
+    try {
+      POSTGRESQL_DOCKER_CONTAINER = new PostgresqlDockerContainer();
+      POSTGRESQL_DOCKER_CONTAINER.start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 }
